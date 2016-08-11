@@ -1,48 +1,11 @@
-var $boxes = $('.row div');
-var $lastclick;
-
-// Array of string values, state of the artboard
-// 0 -- transparent
-// 1 -- black
-// 2 -- color
-var state = [];
-for(var i = 0; i < 400; i++){
-  state.push("0");
+function updateLink(){
+  var $button = $("#update");
+  var compressed = compress(state.join(""));
+  var link = "?state=" + compressed;
+  $button.attr("href", link);
+  $button.removeClass("current hidden");
+  $button.text("Update");
 }
-
-if(window.location.href.indexOf("?state=") != -1){
-  console.log("loading from url.");
-  $("#update").text("Updated");
-  $("#update").addClass("current");
-  var decompressed = decompress(window.location.href.split("=")[1]);
-  console.log(decompressed);
-  var urlState = decompressed.split("");
-
-  for(var i = 0; i < urlState.length; i++){
-    state[i] = urlState[i]
-    switch(urlState[i]){
-      case "0":
-        continue;
-        break;
-      case "1":
-        toggle($boxes.eq(i));
-        break;
-      case "2":
-        toggle($boxes.eq(i));
-        toggle($boxes.eq(i));
-        break;
-      default:
-        break;
-    }
-  }
-} else {
-  $('#update').addClass("hidden");
-}
-
-$boxes.mousedown(function(e){
-    toggle($(this));
-    updateLink();
-});
 
 function toggle($el){
   var index = getIndex($el);
@@ -57,18 +20,6 @@ function toggle($el){
     $el.addClass("black");
     state[index] = "1";
   }
-}
-
-function getIndex($el){
-  return $el.index() + ($el.parent().index() * 20);
-}
-
-function updateLink(){
-  var compressed = compress(state.join(""));
-  var link = "?state=" + compressed;
-  $("#update").attr("href", link);
-  $("#update").removeClass("current hidden");
-  $("#update").text("Update");
 }
 
 function compress(string){
@@ -110,4 +61,37 @@ function decompress(string){
     return result;
   });
   return string;
+}
+
+function loadState(){
+  // console.log("loading from url.");
+  $("#update").text("Updated");
+  $("#update").addClass("current");
+  var decompressed = decompress(getURLParameter("state"));
+  // console.log(decompressed);
+  var urlState = decompressed.split("");
+  for(var i = 0; i < urlState.length; i++){
+    state[i] = urlState[i];
+    switch(urlState[i]){
+      case "0":
+        continue;
+      case "1":
+        toggle($boxes.eq(i));
+        break;
+      case "2":
+        toggle($boxes.eq(i));
+        toggle($boxes.eq(i));
+        break;
+      default:
+        break;
+    }
+  }
+}
+
+function getIndex($el){
+  return $el.index() + ($el.parent().index() * 20);
+}
+
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
