@@ -1,14 +1,8 @@
-function updateLink(){
-  var $button = $("#update");
-  var compressed = compress(state.join(""));
-  var link = "?state=" + compressed;
-  $button.attr("href", link);
-  $button.removeClass("current hidden");
-  $button.text("Update");
-}
-
+/*
+Toggles the element between the three colors
+*/
 function toggle($el){
-  var index = getIndex($el);
+  var index = globalIndex($el);
   if($el.hasClass("black")){
     $el.removeClass("black");
     $el.addClass("color");
@@ -20,6 +14,18 @@ function toggle($el){
     $el.addClass("black");
     state[index] = "1";
   }
+}
+
+/*
+Updates the link which is used to save state of artboard
+*/
+function updateLink(){
+  var $button = $("#update");
+  var compressed = compress(state.join(""));
+  var link = "?state=" + compressed;
+  $button.attr("href", link);
+  $button.removeClass("current hidden");
+  $button.text("Update");
 }
 
 function compress(string){
@@ -63,10 +69,11 @@ function decompress(string){
   return string;
 }
 
+/*
+Loads the state of the artboard from the url
+*/
 function loadState(){
   // console.log("loading from url.");
-  $("#update").text("Updated");
-  $("#update").addClass("current");
   var decompressed = decompress(getURLParameter("state"));
   // console.log(decompressed);
   var urlState = decompressed.split("");
@@ -86,12 +93,22 @@ function loadState(){
         break;
     }
   }
+  $("#update").text("Updated");
+  $("#update").addClass("current");
 }
 
-function getIndex($el){
+/*
+Calculates the index of the element in relation to the artboard
+as a whole and not just the index in the individual row.
+*/
+function globalIndex($el){
   return $el.index() + ($el.parent().index() * 20);
 }
 
+/*
+Gets parameters from the url
+Source: http://stackoverflow.com/a/11582513/3498950
+*/
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
