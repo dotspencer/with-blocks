@@ -15,6 +15,7 @@ if(getURLParameter("state") == null){
 } else {
   loadState();
 }
+loadColor();
 
 $boxes.mousedown(function(e){
     toggle($(this));

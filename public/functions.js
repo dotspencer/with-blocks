@@ -97,6 +97,10 @@ function loadState(){
   $("#update").addClass("current");
 }
 
+function loadColor(){
+  changeColor(getURLParameter("color"));
+}
+
 /*
 Calculates the index of the element in relation to the artboard
 as a whole and not just the index in the individual row.
@@ -111,4 +115,15 @@ Source: http://stackoverflow.com/a/11582513/3498950
 */
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
+
+function changeColor(color){
+  $("#color").html("div.color{background-color:" + color + ";}")
+}
+
+function promptColorChange(){
+  var color = prompt("Change color to:");
+  if(color.length != 0){
+    changeColor(color);
+  }
 }
