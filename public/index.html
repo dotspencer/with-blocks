@@ -9,7 +9,7 @@
   </head>
   <body>
     <main>
-      <div class="artboard">
+      <div class="artboard white">
         <div class="row"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         <div class="row"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         <div class="row"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
@@ -31,11 +31,19 @@
         <div class="row"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         <div class="row"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
       </div>
-      <button onclick="promptColorChange()">Change Color</button>
-      <a href="#" id="update">Update</a>
+      <div class="color-bar">
+        <div class="white"></div><div class="color"></div><div class="black"></div>
+      </div>
+      <div class="share">
+        <input type="text" name="url" value="">
+        <a href="#">...</a>
+      </div>
+      <!-- <a href="#" id="update">Update</a> -->
     </main>
     <footer>
-      <style id="color">div.color{background-color: dodgerblue;}</style>
+      <style id="white">div.white{background-color: whitesmoke;}</style>
+      <style id="color">div.color{background-color: crimson;}</style>
+      <style id="black">div.black{background-color: #333;}</style>
       <script src="main.js" charset="utf-8"></script>
     </footer>
   </body>

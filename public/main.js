@@ -1,5 +1,7 @@
 var $boxes = $('.row div');
 var $lastclick;
+bindEvents();
+var colors;
 
 // Array of string values, state of the artboard
 // 0 -- transparent
@@ -15,7 +17,7 @@ if(getURLParameter("state") == null){
 } else {
   loadState();
 }
-loadColor();
+// loadColor();
 
 $boxes.mousedown(function(e){
     toggle($(this));

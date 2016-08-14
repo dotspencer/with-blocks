@@ -117,13 +117,20 @@ function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
 
-function changeColor(color){
-  $("#color").html("div.color{background-color:" + color + ";}")
+function changeColor(index, color){
+  var names = ["white", "color", "black"];
+  $("footer style").eq(index).html("div." + names[index] + "{background-color:" + color + ";}");
 }
 
-function promptColorChange(){
+function promptColorChange(index){
   var color = prompt("Change color to:");
   if(color.length != 0){
-    changeColor(color);
+    changeColor(index, color);
   }
+}
+
+function bindEvents(){
+  $('.color-bar div').click(function(){
+    promptColorChange($(this).index());
+  })
 }
