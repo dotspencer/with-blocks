@@ -1,3 +1,5 @@
+var checkText = "✓";
+var modifiedText = "...";
 /*
 Toggles the element between the three colors
 */
@@ -25,7 +27,7 @@ function updateLink(){
   var link = "?state=" + compressed;
   $button.attr("href", link);
   $button.removeClass("current hidden");
-  $button.text("Update");
+  $button.text(modifiedText);
 }
 
 function compress(string){
@@ -73,6 +75,10 @@ function decompress(string){
 Loads the state of the artboard from the url
 */
 function loadState(){
+  if(getURLParameter("state") == null){
+    $('#update').addClass("hidden");
+    return;
+  }
   // console.log("loading from url.");
   var decompressed = decompress(getURLParameter("state"));
   // console.log(decompressed);
@@ -93,7 +99,7 @@ function loadState(){
         break;
     }
   }
-  $("#update").text("Updated");
+  $("#update").text(checkText);
   $("#update").addClass("current");
 }
 
