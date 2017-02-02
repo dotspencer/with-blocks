@@ -1,0 +1,47 @@
+*{margin: 0;}
+body{
+  background-color: #282828;
+  text-align: center;
+}
+.artboard {
+    margin-top: calc(50vh - 300px);
+}
+.white {
+  background-color: whitesmoke;
+}
+a{
+  color: white;
+  text-decoration: none;
+  cursor: default;
+}
+.controls{
+  width: 600px;
+  margin: 0 auto;
+  text-align: left;
+  user-select: none;
+}
+.button{
+  background-color: rgba(82, 80, 80, 1);
+  display: inline-block;
+  padding: 10px;
+  cursor: pointer;
+  transition: all .15s;
+
+  img{
+    opacity: .6;
+    transition: inherit;
+  }
+  &.updated{
+    pointer-events: none;
+    img{
+      // opacity: .5;
+    }
+  }
+  &:hover{
+    background-color: rgba(82, 80, 80, 0.6);
+
+    img{
+      //opacity: .5;
+    }
+  }
+}
