@@ -21,8 +21,8 @@ function hideModified(){
 
 // Loads saved state from url
 function loadState(){
-  var path = location.pathname.substring(1);
-  if(path == ""){
+  var path = (window.location.search.match('s=(.*)') || [])[1]
+  if(path == "" || path == null){
     return state;
   }
 
@@ -91,7 +91,7 @@ function compress(text) {
 }
 
 function loadSaved(){
-  window.location = "/" + compressedState;
+  window.location = "/?s=" + compressedState;
 }
 
 // Gets the mouse position relative to the canvas
