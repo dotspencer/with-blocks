@@ -91,7 +91,7 @@ function compress(text) {
 }
 
 function loadSaved(){
-  window.location = "/?s=" + compressedState;
+  location = location.origin + location.pathname + '?s=' + compressedState;
 }
 
 // Gets the mouse position relative to the canvas
